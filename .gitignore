@@ -2,3 +2,5 @@
 
 node_modules/
 package-lock.json
+
+./monitor/node_modules/
