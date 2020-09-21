@@ -1,15 +1,44 @@
 {
-  "name": "log-collect",
-  "version": "1.0.0",
+  "name": "monitor",
+  "version": "",
   "description": "",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
+  "keywords": [],
   "author": "",
-  "license": "ISC",
+  "main": "lib/index.js",
+  "scripts": {
+    "type-check": "tsc --noEmit",
+    "type-check:watch": "npm run type-check -- --watch",
+    "lint": "eslint --max-warnings 0 'src/**/*.ts'",
+    "build": "npm run build:types && npm run build:js",
+    "build:types": "tsc --emitDeclarationOnly",
+    "build:js": "babel src --out-dir lib --extensions \".ts,.tsx\" --source-maps inline",
+    "start": "node lib/index.js",
+    "prepare": "npm run build",
+    "pm2": "pm2 start lib/index.js"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.8.4",
+    "@babel/core": "^7.8.7",
+    "@babel/plugin-proposal-class-properties": "^7.8.3",
+    "@babel/plugin-proposal-numeric-separator": "^7.8.3",
+    "@babel/plugin-proposal-object-rest-spread": "^7.8.3",
+    "@babel/plugin-transform-runtime": "^7.8.3",
+    "@babel/preset-env": "^7.8.7",
+    "@babel/preset-typescript": "^7.8.3",
+    "@types/node": "^12.12.30",
+    "@typescript-eslint/eslint-plugin": "^2.24.0",
+    "@typescript-eslint/parser": "^2.24.0",
+    "cross-env": "^7.0.2",
+    "eslint": "^6.8.0",
+    "eslint-config-airbnb-base": "^14.1.0",
+    "eslint-plugin-import": "^2.20.1",
+    "typescript": "^3.8.3"
+  },
+  "bin": {
+    "log.io-file-input": "./bin/log.io-file-input"
+  },
   "dependencies": {
-    "chokidar": "^3.4.2",
-    "exec-sh": "^0.3.4"
+    "@babel/runtime": "^7.8.7",
+    "got": "^11.7.0"
   }
 }
